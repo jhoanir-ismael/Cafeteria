@@ -4,58 +4,49 @@
     {
         static void Main(string[] args)
         {
-            //Bebida 1
-            Console.Write("Escribe el nombre de la Bebida 1: ");
-            string nombre1 = Console.ReadLine();
+            //Estructura de Almacenamiento
+            List<Bebida> pedido = new List<Bebida>();
 
-            Console.Write("Escribe el tamaño: ");
-            string tamaño1 = Console.ReadLine();
+            //5 bebidas
+            pedido.Add(new Bebida_Hot("Café Americano", "Grande", 90, 45));
+            pedido.Add(new Bebida_fria("Frappé de Capuchino", "Mediano", 5, 60));
+            pedido.Add(new Bebida_Hot("Té de Manzanilla", "Chico", 75, 30));
+            pedido.Add(new Bebida_fria("Té Helado", "Grande", 8, 40));
+            pedido.Add(new Bebida_Hot("Cafe Vainilla", "Mediano", 89, 50));
 
-            Console.Write("Escribe el precio: ");
-            double precio1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("=== TICKET DE BARRA ===\n");
 
-            Bebida bebida1 = new Bebida(nombre1, tamaño1, precio1);
+            double costoTotal = 0; 
 
-            //Bebida 2
-            Console.Write("Escribe el nombre de la Bebida 2: ");
-            string nombre2 = Console.ReadLine();
+           
+            foreach (Bebida b in pedido)
+            {
+                
+                Console.WriteLine(b.Preparar());
 
-            Console.Write("Escribe el tamaño: ");
-            string tamaño2 = Console.ReadLine();
+                
 
-            Console.Write("Escribe el precio: ");
-            double precio2 = Convert.ToDouble(Console.ReadLine());
+                if (b is Bebida_Hot caliente)
+                {
+                    
+                    if (caliente.Temperatura > 88)
+                    {
+                        Console.WriteLine("ADVERTENCIA: ¡Cuidado, bebida muy caliente!");
+                    }
+                }
 
-            Bebida bebida2 = new Bebida(nombre2, tamaño2, precio2);
+                //Sumatoria de los prewcios
+                costoTotal = costoTotal + b.GetPrecio();
 
-            //Bebida 3
-            Console.Write("Escribe el nombre de la Bebida 3: ");
-            string nombre3 = Console.ReadLine();
+                Console.WriteLine("\n");
+            }
 
-            Console.Write("Escribe el tamaño: ");
-            string tamaño3 = Console.ReadLine();
+            //Mostramos el total
+            Console.WriteLine("\nTotal a pagar: $" + costoTotal);
 
-            Console.Write("Escribe el precio: ");
-            double precio3 = Convert.ToDouble(Console.ReadLine());
+            Console.ReadLine();
 
-            Bebida bebida3 = new Bebida(nombre3, tamaño3, precio3);
 
-            Console.WriteLine("\nAplicando un 15% de descuento a la Bebida 2 \n");
-            bebida2.AplicarDescuento(15);
-
-            Console.WriteLine("Resumen del Pedido\n");
-
-            // bebida 1
-            bebida1.Preparar();
-            bebida1.MostrarDatos();
-
-            //bebida 2
-            bebida2.Preparar();
-            bebida2.MostrarDatos();
-
-            //bebida 3
-            bebida3.Preparar();
-            bebida3.MostrarDatos();
         }
     }
 }
